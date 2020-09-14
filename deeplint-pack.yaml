@@ -26,6 +26,139 @@ rules:
       description: "Dummy Rule"
       tags:
         - "security"
+  
+  SecurityGroupUnrestrictedIngressPort:
+    type: nodejs
+    uses: src/rules/SecurityGroupUnrestrictedIngressPort.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure no security groups allow ingress from 0.0.0.0:0 to specified port"
+      tags:
+        - "security"
+
+
+  ALBListenerHTTPS:
+    type: nodejs
+    uses: src/rules/SecurityGroupUnrestrictedIngressPort.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure ALB protocol is HTTPS"
+      tags:
+        - "security"
+    
+
+  APIGatewayAccessLogging:
+    type: nodejs
+    uses: src/rules/APIGatewayAccessLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure API Gateway has Access Logging enabled"
+      tags:
+        - "security"
+
+  APIGatewayAuthorization:
+    type: nodejs
+    uses: src/rules/APIGatewayAuthorization.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure there is no open access to back-end resources through API"
+      tags:
+        - "security"
+
+  APIGatewayXray:
+    type: nodejs
+    uses: src/rules/APIGatewayXray.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure API Gateway has X-Ray Tracing enabled"
+      tags:
+        - "security"
+
+  AthenaDatabaseEncryption:
+    type: nodejs
+    uses: src/rules/AthenaDatabaseEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Athena Database is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  AthenaWorkgroupConfiguration:
+    type: nodejs
+    uses: src/rules/AthenaWorkgroupConfiguration.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Athena Workgroup should enforce configuration to prevent client disabling encryption"
+      tags:
+        - "security"
+
+  CloudfrontDistributionEncryption:
+    type: nodejs
+    uses: src/rules/CloudfrontDistributionEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure cloudfront distribution ViewerProtocolPolicy is set to HTTPS"
+      tags:
+        - "security"
+
+
+  CloudfrontDistributionLogging:
+    type: nodejs
+    uses: src/rulesCloudfrontDistributionLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Cloudfront distribution has Access Logging enabled"
+      tags:
+        - "security"
+
+  CloudtrailEncryption:
+    type: nodejs
+    uses: src/CloudtrailEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail logs are encrypted at rest using KMS CMKs"
+      tags:
+        - "security"
+
+  CloudtrailLogValidation:
+    type: nodejs
+    uses: src/CloudtrailLogValidation.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail log file validation is enabled"
+      tags:
+        - "security"
+
+  CloudtrailMultiRegion:
+    type: nodejs
+    uses: src/CloudtrailMultiRegion.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail is enabled in all Regions"
+      tags:
+        - "security"
+
+  CodeBuildProjectEncryption:
+    type: nodejs
+    uses: src/CodeBuildProjectEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure that CodeBuild Project encryption is not disabled"
+      tags:
+        - "security"
 
 #actions:
 #  dummy-fix:
