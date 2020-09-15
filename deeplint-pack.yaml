@@ -160,6 +160,46 @@ rules:
       tags:
         - "security"
 
+  DAXEncryption:
+    type: nodejs
+    uses: src/DAXEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DAX is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  DocDBEncryption:
+    type: nodejs
+    uses: src/DocDBEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DocDB is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  DocDBLogging:
+    type: nodejs
+    uses: src/DocDBLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DocDB Logging is enabled"
+      tags:
+        - "security"
+
+  DynamodbRecovery:
+    type: nodejs
+    uses: src/DynamodbRecovery.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Dynamodb point in time recovery (backup) is enabled"
+      tags:
+        - "security"
+
 #actions:
 #  dummy-fix:
 #    type: nodejs
