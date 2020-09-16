@@ -18,8 +18,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'encryption_option') && resource.properties.encryption_option != "")
                 {
 
-                    isEncrypted = true
-                    continue 
+                    isEncrypted = true;
+                    continue; 
                 }
 
 
@@ -36,7 +36,7 @@ exports.check = async function (context) {
                         message: `AWS Athena: ${resource.name} does not have the encryption enabled for the data in rest`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

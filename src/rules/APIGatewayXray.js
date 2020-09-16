@@ -16,8 +16,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'tracing_enabled') && resource.properties.tracing_enabled == true)
                 {
 
-                    isXrayEnabled = true
-                    continue 
+                    isXrayEnabled = true;
+                    continue; 
                 }
 
 
@@ -34,7 +34,7 @@ exports.check = async function (context) {
                         message: `AWS API Gateway: ${resource.name} does not have X-Ray enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

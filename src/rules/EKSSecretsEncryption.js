@@ -11,20 +11,20 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::cloudFront::types::loggingconfig') {
+                if (resource.type === 'aws::eks::types::encryptionconfig') {
                 
 
 
-                    if (_.has(resource.properties, 'enabled') && resource.properties.enabled == true)
+                    if (_.has(resource.properties, 'resources') &&  (((resource.properties.resources).has("secrets"))))
                     {
 
                         isEnabled = true;
-                        continue; 
-                    }
+                        continue;
 
+                    }
+                    
 
                 }
-            
 
 
             }
@@ -37,7 +37,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS Cloudfront Distribution ${resource.name} does not have the logging enabled`
+                        message: `AWS EKS ${resource.name} has 0.0.0.0/0 for accepting public iIngress traffic`
                     })
                 }
                     continue;

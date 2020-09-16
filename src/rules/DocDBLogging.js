@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'enabled_cloudwatch_logs_exports') &&  (resource.properties.enabled_cloudwatch_logs_exports).some(v => log_types.includes(v)))
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 
@@ -39,7 +39,7 @@ exports.check = async function (context) {
                         message: `AWS Doc DB ${resource.name} does not have the proper logging enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

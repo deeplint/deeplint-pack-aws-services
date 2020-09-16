@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'log_file_validation_enabled') && resource.properties.log_file_validation_enabled == true)
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 
@@ -40,7 +40,7 @@ exports.check = async function (context) {
                         message: `AWS CloudTrail ${resource.name} does not have the log file validation enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

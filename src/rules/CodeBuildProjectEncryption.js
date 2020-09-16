@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'encryption_disabled') && resource.properties.encryption_disabled == false)
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 
@@ -40,7 +40,7 @@ exports.check = async function (context) {
                         message: `AWS Code Build ${resource.name} does not have the encryption enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

@@ -18,8 +18,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'enforce_work_group_configuration') && resource.properties.enforce_work_group_configuration == true)
                 {
 
-                    isEnforced = true
-                    continue 
+                    isEnforced = true;
+                    continue;
                 }
 
 
@@ -36,7 +36,7 @@ exports.check = async function (context) {
                         message: `AWS Athena Workgroup: ${resource.name} does not enforce the encryption on clients`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

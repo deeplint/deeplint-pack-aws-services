@@ -16,8 +16,8 @@ exports.check = async function (context) {
                     if ((_.has(resource.properties, 'authorization_type') && resource.properties.authorization_type == "NONE") && (_.has(resource.properties, 'http_method') && resource.properties.http_method != "OPTIONS"))
                     {
 
-                        isAuthEnabled = false
-                        continue 
+                        isAuthEnabled = false;
+                        continue; 
                     }
 
 
@@ -38,7 +38,7 @@ exports.check = async function (context) {
                         message: `AWS APi Gateway: ${resource.name} has open access to backend resources through API`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

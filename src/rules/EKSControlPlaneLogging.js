@@ -11,11 +11,11 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::cloudFront::types::loggingconfig') {
+                if (resource.type === 'aws::eks::types::logging') {
                 
 
 
-                    if (_.has(resource.properties, 'enabled') && resource.properties.enabled == true)
+                    if (_.has(resource.properties, 'cluster_logging') &&  ((resource.properties.cluster_logging).has("enabled: true")))
                     {
 
                         isEnabled = true;
@@ -24,7 +24,6 @@ exports.check = async function (context) {
 
 
                 }
-            
 
 
             }
@@ -37,7 +36,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS Cloudfront Distribution ${resource.name} does not have the logging enabled`
+                        message: `AWS EKS ${resource.name} does not have logging enabled`
                     })
                 }
                     continue;

@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'storage_encrypted') && resource.properties.storage_encrypted == true)
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 
@@ -32,8 +32,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'storage_encrypted') && resource.properties.storage_encrypted == true)
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 

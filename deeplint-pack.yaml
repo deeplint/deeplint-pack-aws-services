@@ -200,6 +200,56 @@ rules:
       tags:
         - "security"
 
+  EFSEncryptionEnabled:
+    type: nodejs
+    uses: src/EFSEncryptionEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure EFS is securely encrypted"
+      tags:
+        - "security"
+
+
+  EKSPublicAccess:
+    type: nodejs
+    uses: src/EKSPublicAccess.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS public endpoint disabled"
+      tags:
+        - "security"
+
+  EKSControlPlaneLogging:
+    type: nodejs
+    uses: src/EKSControlPlaneLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS control plane logging enabled for all log types"
+      tags:
+        - "security"
+
+  EKSPublicAccessCIDR:
+    type: nodejs
+    uses: src/EKSPublicAccessCIDR.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS public endpoint not accessible to 0.0.0.0/0"
+      tags:
+        - "security"
+
+  EKSSecretsEncryption:
+    type: nodejs
+    uses: src/EKSSecretsEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure EKS Cluster has Secrets Encryption Enabled"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

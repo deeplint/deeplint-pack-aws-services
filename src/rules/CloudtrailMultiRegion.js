@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'is_multi_region_trail') && resource.properties.is_multi_region_trail == true)
                     {
 
-                        isMulti = true
-                        continue 
+                        isMulti = true;
+                        continue; 
                     }
 
 
@@ -40,7 +40,7 @@ exports.check = async function (context) {
                         message: `AWS CloudTrail ${resource.name} is not enabled in all regions`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

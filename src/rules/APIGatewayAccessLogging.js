@@ -16,8 +16,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'destination_arn') && resource.properties.destination_arn != "")
                     {
 
-                        isLoggingEnabled = true
-                        continue 
+                        isLoggingEnabled = true;
+                        continue; 
                     }
 
 
@@ -28,8 +28,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'destination_arn') && resource.properties.destination_arn != "")
                     {
 
-                        isLoggingEnabled = true
-                        continue 
+                        isLoggingEnabled = true;
+                        continue; 
                     }
 
 

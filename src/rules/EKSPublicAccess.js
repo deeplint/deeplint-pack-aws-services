@@ -7,24 +7,23 @@ exports.check = async function (context) {
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isDisabled = false;
 
             try {
 
-                if (resource.type === 'aws::cloudFront::types::loggingconfig') {
+                if (resource.type === 'aws::eks::types::vpcconfigrequest') {
                 
 
 
-                    if (_.has(resource.properties, 'enabled') && resource.properties.enabled == true)
+                    if (_.has(resource.properties, 'endpoint_public_access') &&  ((resource.properties.endpoint_public_access == false)))
                     {
 
-                        isEnabled = true;
+                        isDisabled = true;
                         continue; 
                     }
 
 
                 }
-            
 
 
             }
@@ -35,12 +34,12 @@ exports.check = async function (context) {
         
             finally{
 
-                if (!isEnabled) {
+                if (!isDisabled) {
                     problems.push({
-                        message: `AWS Cloudfront Distribution ${resource.name} does not have the logging enabled`
+                        message: `AWS EKS ${resource.name} has public access enabled`
                     })
                 }
-                    continue;
+                    continue
         
                 }
         }

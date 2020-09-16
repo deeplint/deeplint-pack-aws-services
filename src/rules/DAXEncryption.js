@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'status') && resource.properties.status == "ENABLED")
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 
@@ -40,7 +40,7 @@ exports.check = async function (context) {
                         message: `AWS DAX ${resource.name} does not have the Server Side encryption enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

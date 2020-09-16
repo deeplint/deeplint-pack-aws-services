@@ -17,8 +17,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'protocol') && resource.properties.protocol.indexOf(allowedProtocols))
                 {
 
-                    isEncryptionEnabled = true
-                    continue 
+                    isEncryptionEnabled = true;
+                    continue; 
                 }
 
                 else if (resource.type === 'aws::elasticloadbalancingv2::types::listener') {
@@ -26,8 +26,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'protocol') && resource.properties.protocol.indexOf(allowedProtocolsV2))
                     {
     
-                        isEncryptionEnabled = true
-                        continue 
+                        isEncryptionEnabled = true;
+                        continue; 
                     }
 
                     else if (_.has(resource.properties, 'protocol') && resource.properties.protocol == 'HTTP')
@@ -37,8 +37,8 @@ exports.check = async function (context) {
                         if (_.has(resource.properties, 'default_action') && resource.properties.default_action.type ==  'redirect' && _.has(resource.properties.default_action, 'redirect_config' && _.has(resource.properties.default_action.redirect_config, 'protocol') && resource.properties.default_action.redirect_config.protocol == "HTTPS"))  
                             {
 
-                                isEncryptionEnabled = true
-                                continue 
+                                isEncryptionEnabled = true;
+                                continue; 
 
                             }
 
@@ -60,7 +60,7 @@ exports.check = async function (context) {
                         message: `AWS Load Balancer: ${resource.name} does not have encryption enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

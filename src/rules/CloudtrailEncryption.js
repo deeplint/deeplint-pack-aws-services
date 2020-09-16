@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'kms_key_id') && resource.properties.kms_key_id != "")
                     {
 
-                        isEncrypted = true
-                        continue 
+                        isEncrypted = true;
+                        continue;
                     }
 
 
@@ -40,7 +40,7 @@ exports.check = async function (context) {
                         message: `AWS CloudTrail ${resource.name} does not have the encryption enabled`
                     })
                 }
-                    continue
+                    continue;
         
                 }
         }

@@ -18,8 +18,8 @@ exports.check = async function (context) {
                     if (_.has(resource.properties, 'point_in_time_recovery_status') &&  (resource.properties.point_in_time_recovery_status == "ENABLED"))
                     {
 
-                        isEnabled = true
-                        continue 
+                        isEnabled = true;
+                        continue; 
                     }
 
 

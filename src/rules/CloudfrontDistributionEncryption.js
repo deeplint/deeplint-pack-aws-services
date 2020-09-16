@@ -18,8 +18,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'viewer_protocol_policy') && resource.properties.viewer_protocol_policy == "allow-all")
                 {
 
-                    isHTTPS = false
-                    continue 
+                    isHTTPS = false;
+                    continue; 
                 }
 
 
@@ -34,8 +34,8 @@ exports.check = async function (context) {
                 if (_.has(resource.properties, 'viewer_protocol_policy') && resource.properties.viewer_protocol_policy == "allow-all")
                 {
 
-                    isHTTPS = false
-                    continue 
+                    isHTTPS = false;
+                    continue; 
                 }
 
 

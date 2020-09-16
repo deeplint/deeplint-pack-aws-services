@@ -11,20 +11,19 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::cloudFront::types::loggingconfig') {
+                if (resource.type === 'aws::efs::types::filesystemdescription') {
                 
 
 
-                    if (_.has(resource.properties, 'enabled') && resource.properties.enabled == true)
+                    if (_.has(resource.properties, 'encrypted') &&  (resource.properties.encrypted == true))
                     {
 
                         isEnabled = true;
-                        continue; 
+                        continue;
                     }
 
 
                 }
-            
 
 
             }
@@ -37,7 +36,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS Cloudfront Distribution ${resource.name} does not have the logging enabled`
+                        message: `AWS EFS ${resource.name} does not have the encryption enabled`
                     })
                 }
                     continue;
