@@ -7,21 +7,23 @@ exports.check = async function (context) {
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isEnabled = true;
 
             try {
 
-                if (resource.type === 'aws::eks::types::encryptionconfig') {
+                if (resource.type === 'aws::elasticache::types::createreplicationgroupmessage') {
                 
 
 
-                    if (_.has(resource.properties, 'resources') &&  (((resource.properties.resources).has("secrets"))))
+                    if (_.has(resource.properties, 'transit_encryption_enabled') &&  (((resource.properties.transit_encryption_enabled == true))))
                     {
+                        if  (!_.has(resource.properties, 'auth_token'))
 
-                        isEnabled = true;
-                        continue;
+                        {
+                                isEnabled = false;
+                                continue;
 
-                    }
+                    }}
                     
 
                 }
@@ -37,7 +39,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS EKS ${resource.name} does not have the secrets encryption enabled`
+                        message: `AWS ElastiCache ${resource.name} has the in-transit encryption enabled but no AuthToken set`
                     })
                 }
                     continue;

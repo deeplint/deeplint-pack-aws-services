@@ -11,13 +11,12 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::eks::types::encryptionconfig') {
+                if (resource.type === 'aws::elasticsearchservice::types::logpublishingoption') {
                 
 
 
-                    if (_.has(resource.properties, 'resources') &&  (((resource.properties.resources).has("secrets"))))
+                    if (_.has(resource.properties, 'enabled') &&  (((resource.properties.enabled == true))))
                     {
-
                         isEnabled = true;
                         continue;
 
@@ -37,7 +36,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS EKS ${resource.name} does not have the secrets encryption enabled`
+                        message: `AWS ElastiCache ${resource.name} does not have the logging enabled`
                     })
                 }
                     continue;

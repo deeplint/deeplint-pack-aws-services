@@ -250,6 +250,57 @@ rules:
       description: "Ensure EKS Cluster has Secrets Encryption Enabled"
       tags:
         - "security"
+
+  ElasticacheReplicationGroupEncryptionAtRest:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtRest.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at rest"
+      tags:
+        - "security"
+
+  ElasticacheReplicationGroupEncryptionAtTransit:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtTransit.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at transit"
+      tags:
+        - "security"
+
+  ElasticacheReplicationGroupEncryptionAtTransitAuthToken:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtTransitAuthToken.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at transit and has auth token"
+      tags:
+        - "security"
+
+
+  ElasticsearchDomainEnforceHTTPS:
+    type: nodejs
+    uses: src/ElasticsearchDomainEnforceHTTPS.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Elasticsearch Domain enforces HTTPS"
+      tags:
+        - "security"
+
+  ElasticsearchDomainLogging:
+    type: nodejs
+    uses: src/ElasticsearchDomainLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Elasticsearch Domain Logging is enabled"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

@@ -11,13 +11,12 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::eks::types::encryptionconfig') {
+                if (resource.type === 'aws::elasticsearchservice::types::domainendpointoptions') {
                 
 
 
-                    if (_.has(resource.properties, 'resources') &&  (((resource.properties.resources).has("secrets"))))
+                    if (_.has(resource.properties, 'enforce_https') &&  (((resource.properties.enforce_https == true))))
                     {
-
                         isEnabled = true;
                         continue;
 
@@ -37,7 +36,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS EKS ${resource.name} does not have the secrets encryption enabled`
+                        message: `AWS ElastiCache ${resource.name} has the in-transit encryption enabled but no AuthToken set`
                     })
                 }
                     continue;
