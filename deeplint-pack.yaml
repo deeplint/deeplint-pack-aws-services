@@ -301,6 +301,55 @@ rules:
       description: "Ensure Elasticsearch Domain Logging is enabled"
       tags:
         - "security"
+
+  ElasticsearchEncryption:
+    type: nodejs
+    uses: src/ElasticsearchEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticsearch is securely encrypted at rest"
+      tags:
+        - "security"
+  ElasticsearchNodeToNodeEncryption:
+    type: nodejs
+    uses: src/ElasticsearchNodeToNodeEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all Elasticsearch has node-to-node encryption enabled"
+      tags:
+        - "security"
+
+  GlobalAcceleratorAcceleratorFlowLogs:
+    type: nodejs
+    uses: src/GlobalAcceleratorAcceleratorFlowLogs.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Global Accelerator accelerator has flow logs enabled"
+      tags:
+        - "security"
+
+  IAMAdminPolicyDocument:
+    type: nodejs
+    uses: src/IAMAdminPolicyDocument.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM policies that allow full \"*-*\" administrative privileges are not created"
+      tags:
+        - "security"
+
+  IAMPolicyAttachedToGroupOrRoles:
+    type: nodejs
+    uses: src/IAMPolicyAttachedToGroupOrRoles.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM policies are attached only to groups or roles (Reducing access management complexity may in-turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges.)"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs
