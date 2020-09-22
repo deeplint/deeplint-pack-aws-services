@@ -350,6 +350,46 @@ rules:
       description: "Ensure IAM policies are attached only to groups or roles (Reducing access management complexity may in-turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges.)"
       tags:
         - "security"
+
+  IAMRoleAllowsPublicAssume:
+    type: nodejs
+    uses: src/IAMRoleAllowsPublicAssume.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM role allows only specific services or principals to assume it"
+      tags:
+        - "security"
+
+  IAMRoleAllowAssumeFromAccount:
+    type: nodejs
+    uses: src/IAMRoleAllowAssumeFromAccount.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM role allows only specific principals in account to assume it"
+      tags:
+        - "security"
+
+  IMDSv1Disabled:
+    type: nodejs
+    uses: src/IMDSv1Disabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Instance Metadata Service Version 1 is not enabled"
+      tags:
+        - "security"
+
+  KMSRotation:
+    type: nodejs
+    uses: src/KMSRotation.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure rotation for customer created CMKs is enabled"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

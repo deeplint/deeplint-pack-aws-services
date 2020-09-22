@@ -2,12 +2,12 @@ exports.check = async function (context) {
     const resources = context.getResources()
     let problems = []
     const _ = require('lodash')
-
+    account_access = /\d{12}|arn:aws:iam::\d{12}:root/
 
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isGrantedSpecific = false;
 
             try {
 
@@ -15,13 +15,12 @@ exports.check = async function (context) {
                 
 
 
-                    if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
+                    if (_.has(resource.properties, 'principals') &&  ((((resource.properties.principals.AWS).match(account_access) == null ))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
-                        {
-                        isEnabled = true;
+
+                        isGrantedSpecific = false;
                         continue;
-                        }
+                        
                     }
                     
 
@@ -30,15 +29,16 @@ exports.check = async function (context) {
 
             }
             catch(e) {
-
+                    //means only to specific users, not to root
+                    isGrantedSpecific = true;
                     console.error(e.message);
             }
         
             finally{
 
-                if (!isEnabled) {
+                if (!isGrantedSpecific) {
                     problems.push({
-                        message: `AWS IAM ${resource.name} contains asterisk (*) in resources/actons`
+                        message: `AWS IAM ${resource.name} has generic principals to assume the role`
                     })
                 }
                     continue;

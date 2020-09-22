@@ -17,7 +17,7 @@ exports.check = async function (context) {
 
                     if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
+                        if (((resource.properties.actions).has("*")))
                         {
                         isEnabled = true;
                         continue;
@@ -38,7 +38,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS IAM ${resource.name} contains asterisk (*) in resources/actons`
+                        message: `AWS IAM Policy ${resource.name} contains asterisk (*) in actions`
                     })
                 }
                     continue;

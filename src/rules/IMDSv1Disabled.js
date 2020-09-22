@@ -7,21 +7,21 @@ exports.check = async function (context) {
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isV1Disabled = false;
 
             try {
 
-                if (resource.type === 'aws::core::policy::statement') {
+                if (resource.type === 'aws::ec2::types::instancemetadataoptionsrequest') {
                 
 
 
-                    if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
+                    if ((_.has(resource.properties, 'http_endpoint') &&  (((resource.properties.http_endpoint == "disable")))) || (_.has(resource.properties, 'http_tokens') &&  (((resource.properties.http_tokens == "required")))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
-                        {
-                        isEnabled = true;
+                    
+                        
+                        isV1Disabled = true;
                         continue;
-                        }
+                        
                     }
                     
 
@@ -36,9 +36,9 @@ exports.check = async function (context) {
         
             finally{
 
-                if (!isEnabled) {
+                if (!isV1Disabled) {
                     problems.push({
-                        message: `AWS IAM ${resource.name} contains asterisk (*) in resources/actons`
+                        message: `AWS EC2 instance/Launch template ${resource.name} has Metadata Service Version 1 enabled `
                     })
                 }
                     continue;

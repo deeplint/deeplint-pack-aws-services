@@ -7,7 +7,7 @@ exports.check = async function (context) {
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isPublic = false;
 
             try {
 
@@ -17,9 +17,9 @@ exports.check = async function (context) {
 
                     if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
+                        if (_.has(resource.properties.principal, 'AWS') &&  ((((resource.properties.principal.AWS).has("*")))))
                         {
-                        isEnabled = true;
+                        isPublic = true;
                         continue;
                         }
                     }
@@ -36,9 +36,9 @@ exports.check = async function (context) {
         
             finally{
 
-                if (!isEnabled) {
+                if (isPublic) {
                     problems.push({
-                        message: `AWS IAM ${resource.name} contains asterisk (*) in resources/actons`
+                        message: `AWS IAM Role ${resource.name} contains asterisk (*) in resources/actons to assume itself`
                     })
                 }
                     continue;

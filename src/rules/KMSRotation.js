@@ -11,17 +11,17 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::core::policy::statement') {
+                if (resource.type === 'aws::kms::types::getkeyrotationstatusresponse') {
                 
 
 
-                    if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
+                    if ((_.has(resource.properties, 'key_rotation_enabled') &&  (((resource.properties.key_rotation_enabled == true)))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
-                        {
+                    
+                        
                         isEnabled = true;
                         continue;
-                        }
+                        
                     }
                     
 
@@ -38,7 +38,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS IAM ${resource.name} contains asterisk (*) in resources/actons`
+                        message: `AWS KMS ${resource.name} does not have key rotation enabled`
                     })
                 }
                     continue;
