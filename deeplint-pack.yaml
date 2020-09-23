@@ -390,6 +390,67 @@ rules:
       description: "Ensure rotation for customer created CMKs is enabled"
       tags:
         - "security"
+
+  KinesisStreamEncryptionType:
+    type: nodejs
+    uses: src/KinesisStreamEncryptionType.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Kinesis Stream is securely encrypted"
+      tags:
+        - "security"
+
+  LambdaEnvironmentCredentials:
+    type: nodejs
+    uses: src/LambdaEnvironmentCredentials.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure no hard coded AWS access key and secret key exists in lambda environment"
+      tags:
+        - "security"
+
+
+  LambdaXrayEnabled:
+    type: nodejs
+    uses: src/LambdaXrayEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "X-ray tracing is enabled for Lambda"
+      tags:
+        - "security"
+
+  LaunchConfigurationEBSEncryption:
+    type: nodejs
+    uses: src/LaunchConfigurationEBSEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Launch configuration EBS is securely encrypted"
+      tags:
+        - "security"
+
+  MQBrokerLogging:
+    type: nodejs
+    uses: src/MQBrokerLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MQ Broker logging is enabled"
+      tags:
+        - "security"
+
+  MQBrokerNotPubliclyExposed:
+    type: nodejs
+    uses: src/MQBrokerNotPubliclyExposed.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MQ Broker is not publicly exposed"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

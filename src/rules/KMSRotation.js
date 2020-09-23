@@ -18,7 +18,7 @@ exports.check = async function (context) {
                     if ((_.has(resource.properties, 'key_rotation_enabled') &&  (((resource.properties.key_rotation_enabled == true)))))
                     {
                     
-                        
+
                         isEnabled = true;
                         continue;
                         
