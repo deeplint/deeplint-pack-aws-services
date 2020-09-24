@@ -451,6 +451,108 @@ rules:
       description: "Ensure MQ Broker is not publicly exposed"
       tags:
         - "security"
+
+
+  NeptuneClusterStorageEncrypted:
+    type: nodejs
+    uses: src/NeptuneClusterStorageEncrypted.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Neptune storage is securely encrypted"
+      tags:
+        - "security"
+
+  MSKClusterLogging:
+    type: nodejs
+    uses: src/MSKClusterLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MSK Cluster logging is enabled"
+      tags:
+        - "security"
+
+  MSKClusterEncryption:
+    type: nodejs
+    uses: src/MSKClusterEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MSK Cluster encryption in rest and transit is enabled"
+      tags:
+        - "security"
+
+  PasswordPolicyExpiration:
+    type: nodejs
+    uses: src/PasswordPolicyExpiration.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy expires passwords within 90 days or less"
+      tags:
+        - "security"
+
+  PasswordPolicyLength:
+    type: nodejs
+    uses: src/PasswordPolicyLength.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires minimum length of 14 or greater"
+      tags:
+        - "security"
+
+
+  PasswordPolicyLowercaseLetter:
+    type: nodejs
+    uses: src/PasswordPolicyLowercaseLetter.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one lowercase letter"
+      tags:
+        - "security"
+
+  PasswordPolicyNumber:
+    type: nodejs
+    uses: src/PasswordPolicyNumber.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one number"
+      tags:
+        - "security"
+
+  PasswordPolicyReuse:
+    type: nodejs
+    uses: src/PasswordPolicyReuse.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy prevents password reuse"
+      tags:
+        - "security"
+
+  PasswordPolicySymbol:
+    type: nodejs
+    uses: src/PasswordPolicySymbol.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one symbol"
+      tags:
+        - "security"
+
+  PasswordPolicyUppercaseLetter:
+    type: nodejs
+    uses: src/PasswordPolicyUppercaseLetter.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one uppercase letter"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

@@ -11,19 +11,17 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::kafka::types::encryptioninfo') {
+                if (resource.type === 'aws::neptune::types::dbcluster') {
                 
 
 
-                    if ((_.has(resource.properties, 'encryption_at_rest') &&  resource.properties.encryption_at_rest.data_volume_kms_key_id != ""))
+                    if ((_.has(resource.properties, 'storage_encrypted') &&  ((resource.properties.storage_encrypted == true))))
                     {
-                        if(resource.properties.encryption_in_transit.client_broker != 'TLS' || (_.has(resource.properties.encryption_in_transit, 'in_cluster') && resource.properties.encryption_in_transit ==false))
-                        {
-                        isEnabled = false;
+                    
+
+                        isEnabled = true;
                         continue;
-                    }
-                    isEnabled = true;
-                    continue;
+                        
                     }
                     
 
@@ -40,7 +38,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS MSK Cluster ${resource.name} does not have rest and/or transit encryption enabled`
+                        message: `AWS Nptune ${resource.name} does not have the encryption enabled`
                     })
                 }
                     continue;

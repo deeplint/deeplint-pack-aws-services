@@ -11,19 +11,17 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::kafka::types::encryptioninfo') {
+                if (resource.type === 'aws::iam::types::passwordpolicy') {
                 
 
 
-                    if ((_.has(resource.properties, 'encryption_at_rest') &&  resource.properties.encryption_at_rest.data_volume_kms_key_id != ""))
+                    if ((_.has(resource.properties, 'require_symbols') &&  ((resource.properties.require_symbols == true))))
                     {
-                        if(resource.properties.encryption_in_transit.client_broker != 'TLS' || (_.has(resource.properties.encryption_in_transit, 'in_cluster') && resource.properties.encryption_in_transit ==false))
-                        {
-                        isEnabled = false;
+                    
+
+                        isEnabled = true;
                         continue;
-                    }
-                    isEnabled = true;
-                    continue;
+                        
                     }
                     
 
@@ -40,7 +38,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS MSK Cluster ${resource.name} does not have rest and/or transit encryption enabled`
+                        message: `AWS IAM Passport policy ${resource.name} does not oblige the usage of at least one symbol`
                     })
                 }
                     continue;
