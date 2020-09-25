@@ -553,6 +553,56 @@ rules:
       description: "Ensure IAM password policy requires at least one uppercase letter"
       tags:
         - "security"
+
+  RDSEncryption:
+    type: nodejs
+    uses: src/RDSEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the RDS is securely encrypted at rest"
+      tags:
+        - "security"
+
+  RDSPubliclyAccessible:
+    type: nodejs
+    uses: src/RDSPubliclyAccessible.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the RDS bucket is not public accessible"
+      tags:
+        - "security"
+
+  RedshiftClusterEncryption:
+    type: nodejs
+    uses: src/RedshiftClusterEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Redshift cluster is securely encrypted at rest"
+      tags:
+        - "security"
+
+  RedshiftClusterLogging:
+    type: nodejs
+    uses: src/RedshiftClusterLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Redshift Cluster logging is enabled"
+      tags:
+        - "security"
+
+  SNSTopicEncryption:
+    type: nodejs
+    uses: src/SNSTopicEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the SNS topic is encrypted"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs
