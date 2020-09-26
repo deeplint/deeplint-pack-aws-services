@@ -15,7 +15,7 @@ exports.check = async function (context) {
                 
 
 
-                    if (_.has(resource.properties, 'principals') &&  (((resource.properties.principals.has("user")))))
+                    if (_.has(resource.properties, 'principals') &&  (((_.has(resource.properties.principals , "user")))))
                     {
 
                         isEnabled = true;

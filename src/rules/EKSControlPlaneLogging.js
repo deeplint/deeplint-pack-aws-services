@@ -15,7 +15,7 @@ exports.check = async function (context) {
                 
 
 
-                    if (_.has(resource.properties, 'cluster_logging') &&  ((resource.properties.cluster_logging).has("enabled: true")))
+                    if (_.has(resource.properties, 'cluster_logging') &&  (_.has(resource.properties.cluster_logging, "enabled: true") ))
                     {
 
                         isEnabled = true;

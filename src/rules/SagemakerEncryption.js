@@ -11,17 +11,17 @@ exports.check = async function (context) {
 
             try {
 
-                if (resource.type === 'aws::core::policy::statement') {
+                if (resource.type === 'aws::sagemaker::types::describenotebookinstanceoutput') {
                 
 
 
-                    if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
+                    if ((_.has(resource.properties, 'kms_key_id') &&  ((resource.properties.kms_key_id != "")) ))
                     {
-                        if (( _.has(resource.properties.actions , "*")))
-                        {
+                    
+
                         isEnabled = true;
                         continue;
-                        }
+                        
                     }
                     
 
@@ -38,7 +38,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS IAM Policy ${resource.name} contains asterisk (*) in actions`
+                        message: `AWS Sage Maker ${resource.name} does not have the encryption enabled`
                     })
                 }
                     continue;

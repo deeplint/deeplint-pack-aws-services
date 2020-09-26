@@ -25,7 +25,7 @@ exports.check = async function (context) {
                     
                     else if (_.has(resource.properties, 'endpoint_public_access') &&  ((resource.properties.endpoint_public_access == true)))
                     {
-                        if (_.has(resource.properties.endpoint_public_access, 'public_access_cidrs') &&  ((resource.properties.endpoint_public_access.public_access_cidrs).has("0.0.0.0/0")))
+                        if (_.has(resource.properties.endpoint_public_access, 'public_access_cidrs') &&  (_.has(resource.properties.endpoint_public_access.public_access_cidrs, "0.0.0.0/0")))
                         {
                         
                             is0 = true;

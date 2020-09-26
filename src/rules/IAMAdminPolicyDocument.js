@@ -17,7 +17,7 @@ exports.check = async function (context) {
 
                     if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
                     {
-                        if (((resource.properties.actions).has("*")) &&  (((resource.properties.resources.has("*")))))
+                        if ( _.has((resource.properties.actions, "*") &&  ((  _.has(resource.properties.resources, "*" ) ))))
                         {
                         isEnabled = true;
                         continue;

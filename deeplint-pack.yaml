@@ -603,6 +603,56 @@ rules:
       description: "Ensure all data stored in the SNS topic is encrypted"
       tags:
         - "security"
+
+  SQSPolicy:
+    type: nodejs
+    uses: src/SQSPolicy.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure SQS policy does not allow ALL (*) actions."
+      tags:
+        - "security"
+
+  SQSQueueEncryption:
+    type: nodejs
+    uses: src/SQSQueueEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the SQS queue is encrypted"
+      tags:
+        - "security"
+
+  SagemakerEncryption:
+    type: nodejs
+    uses: src/SagemakerEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Sagemaker is securely encrypted at rest"
+      tags:
+        - "security"
+
+  WAFEnabled:
+    type: nodejs
+    uses: src/WAFEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "CloudFront Distribution should have WAF enabled"
+      tags:
+        - "security"
+
+  cloudwatchLogGroupRetention:
+    type: nodejs
+    uses: src/cloudwatchLogGroupRetention.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure cloudwatch log groups specify retention days"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs

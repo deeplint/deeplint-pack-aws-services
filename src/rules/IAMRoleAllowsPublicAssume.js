@@ -17,7 +17,7 @@ exports.check = async function (context) {
 
                     if (_.has(resource.properties, 'effect') &&  (((resource.properties.effect == "Allow"))))
                     {
-                        if (_.has(resource.properties.principal, 'AWS') &&  ((((resource.properties.principal.AWS).has("*")))))
+                        if (_.has(resource.properties.principal, 'AWS') &&  ((  _.has((resource.properties.principal.AWS), "*" ))))
                         {
                         isPublic = true;
                         continue;

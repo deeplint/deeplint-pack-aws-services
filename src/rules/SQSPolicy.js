@@ -2,25 +2,25 @@ exports.check = async function (context) {
     const resources = context.getResources()
     let problems = []
     const _ = require('lodash')
-    var conditions = ["aws", "sns", "alias"];
+   
 
     for (const key of Object.keys(resources)) {
         for (const resource of resources[key]) {
             
-                let isEnabled = false;
+                let isEnabled = true;
 
             try {
 
-                if (resource.type === 'aws::sqs::policy::statement') {
+                if (resource.type === 'aws::sqs::types::hetqueueattributesresult') {
                 
 
 
-                    if ((_.has(resource.properties, 'actions') &&  ((conditions.some(tst => (resource.properties.logging_enabled.KmsMasterKeyId).includes(tst)) ))))
+                    if (  (_.has(resource.properties, 'attributes') && (resource.properties.attributes.policy.statement.action == "*" )))
                     {
                     
-                        //ToDO: complete
 
-                        isEnabled = true;
+
+                        isEnabled = false;
                         continue;
                         
                     }
@@ -39,7 +39,7 @@ exports.check = async function (context) {
 
                 if (!isEnabled) {
                     problems.push({
-                        message: `AWS SNS Topic ${resource.name} does not have the encryption enabled`
+                        message: `AWS SQS Queue ${resource.name} contains asterisk (*) for policy actions`
                     })
                 }
                     continue;
