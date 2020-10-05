@@ -26,7 +26,633 @@ rules:
       description: "Dummy Rule"
       tags:
         - "security"
+  
+  SecurityGroupUnrestrictedIngressPort:
+    type: nodejs
+    uses: src/rules/SecurityGroupUnrestrictedIngressPort.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure no security groups allow ingress from 0.0.0.0:0 to specified port"
+      tags:
+        - "security"
 
+
+  ALBListenerHTTPS:
+    type: nodejs
+    uses: src/rules/SecurityGroupUnrestrictedIngressPort.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure ALB protocol is HTTPS"
+      tags:
+        - "security"
+    
+
+  APIGatewayAccessLogging:
+    type: nodejs
+    uses: src/rules/APIGatewayAccessLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure API Gateway has Access Logging enabled"
+      tags:
+        - "security"
+
+  APIGatewayAuthorization:
+    type: nodejs
+    uses: src/rules/APIGatewayAuthorization.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure there is no open access to back-end resources through API"
+      tags:
+        - "security"
+
+  APIGatewayXray:
+    type: nodejs
+    uses: src/rules/APIGatewayXray.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure API Gateway has X-Ray Tracing enabled"
+      tags:
+        - "security"
+
+  AthenaDatabaseEncryption:
+    type: nodejs
+    uses: src/rules/AthenaDatabaseEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Athena Database is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  AthenaWorkgroupConfiguration:
+    type: nodejs
+    uses: src/rules/AthenaWorkgroupConfiguration.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Athena Workgroup should enforce configuration to prevent client disabling encryption"
+      tags:
+        - "security"
+
+  CloudfrontDistributionEncryption:
+    type: nodejs
+    uses: src/rules/CloudfrontDistributionEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure cloudfront distribution ViewerProtocolPolicy is set to HTTPS"
+      tags:
+        - "security"
+
+
+  CloudfrontDistributionLogging:
+    type: nodejs
+    uses: src/rulesCloudfrontDistributionLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Cloudfront distribution has Access Logging enabled"
+      tags:
+        - "security"
+
+  CloudtrailEncryption:
+    type: nodejs
+    uses: src/CloudtrailEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail logs are encrypted at rest using KMS CMKs"
+      tags:
+        - "security"
+
+  CloudtrailLogValidation:
+    type: nodejs
+    uses: src/CloudtrailLogValidation.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail log file validation is enabled"
+      tags:
+        - "security"
+
+  CloudtrailMultiRegion:
+    type: nodejs
+    uses: src/CloudtrailMultiRegion.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure CloudTrail is enabled in all Regions"
+      tags:
+        - "security"
+
+  CodeBuildProjectEncryption:
+    type: nodejs
+    uses: src/CodeBuildProjectEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure that CodeBuild Project encryption is not disabled"
+      tags:
+        - "security"
+
+  DAXEncryption:
+    type: nodejs
+    uses: src/DAXEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DAX is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  DocDBEncryption:
+    type: nodejs
+    uses: src/DocDBEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DocDB is encrypted at rest (default is unencrypted)"
+      tags:
+        - "security"
+
+  DocDBLogging:
+    type: nodejs
+    uses: src/DocDBLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure DocDB Logging is enabled"
+      tags:
+        - "security"
+
+  DynamodbRecovery:
+    type: nodejs
+    uses: src/DynamodbRecovery.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Dynamodb point in time recovery (backup) is enabled"
+      tags:
+        - "security"
+
+  EFSEncryptionEnabled:
+    type: nodejs
+    uses: src/EFSEncryptionEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure EFS is securely encrypted"
+      tags:
+        - "security"
+
+
+  EKSPublicAccess:
+    type: nodejs
+    uses: src/EKSPublicAccess.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS public endpoint disabled"
+      tags:
+        - "security"
+
+  EKSControlPlaneLogging:
+    type: nodejs
+    uses: src/EKSControlPlaneLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS control plane logging enabled for all log types"
+      tags:
+        - "security"
+
+  EKSPublicAccessCIDR:
+    type: nodejs
+    uses: src/EKSPublicAccessCIDR.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Amazon EKS public endpoint not accessible to 0.0.0.0/0"
+      tags:
+        - "security"
+
+  EKSSecretsEncryption:
+    type: nodejs
+    uses: src/EKSSecretsEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure EKS Cluster has Secrets Encryption Enabled"
+      tags:
+        - "security"
+
+  ElasticacheReplicationGroupEncryptionAtRest:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtRest.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at rest"
+      tags:
+        - "security"
+
+  ElasticacheReplicationGroupEncryptionAtTransit:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtTransit.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at transit"
+      tags:
+        - "security"
+
+  ElasticacheReplicationGroupEncryptionAtTransitAuthToken:
+    type: nodejs
+    uses: src/ElasticacheReplicationGroupEncryptionAtTransitAuthToken.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticache Replication Group  is securely encrypted at transit and has auth token"
+      tags:
+        - "security"
+
+
+  ElasticsearchDomainEnforceHTTPS:
+    type: nodejs
+    uses: src/ElasticsearchDomainEnforceHTTPS.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Elasticsearch Domain enforces HTTPS"
+      tags:
+        - "security"
+
+  ElasticsearchDomainLogging:
+    type: nodejs
+    uses: src/ElasticsearchDomainLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Elasticsearch Domain Logging is enabled"
+      tags:
+        - "security"
+
+  ElasticsearchEncryption:
+    type: nodejs
+    uses: src/ElasticsearchEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Elasticsearch is securely encrypted at rest"
+      tags:
+        - "security"
+  ElasticsearchNodeToNodeEncryption:
+    type: nodejs
+    uses: src/ElasticsearchNodeToNodeEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all Elasticsearch has node-to-node encryption enabled"
+      tags:
+        - "security"
+
+  GlobalAcceleratorAcceleratorFlowLogs:
+    type: nodejs
+    uses: src/GlobalAcceleratorAcceleratorFlowLogs.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Global Accelerator accelerator has flow logs enabled"
+      tags:
+        - "security"
+
+  IAMAdminPolicyDocument:
+    type: nodejs
+    uses: src/IAMAdminPolicyDocument.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM policies that allow full \"*-*\" administrative privileges are not created"
+      tags:
+        - "security"
+
+  IAMPolicyAttachedToGroupOrRoles:
+    type: nodejs
+    uses: src/IAMPolicyAttachedToGroupOrRoles.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM policies are attached only to groups or roles (Reducing access management complexity may in-turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges.)"
+      tags:
+        - "security"
+
+  IAMRoleAllowsPublicAssume:
+    type: nodejs
+    uses: src/IAMRoleAllowsPublicAssume.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM role allows only specific services or principals to assume it"
+      tags:
+        - "security"
+
+  IAMRoleAllowAssumeFromAccount:
+    type: nodejs
+    uses: src/IAMRoleAllowAssumeFromAccount.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM role allows only specific principals in account to assume it"
+      tags:
+        - "security"
+
+  IMDSv1Disabled:
+    type: nodejs
+    uses: src/IMDSv1Disabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Instance Metadata Service Version 1 is not enabled"
+      tags:
+        - "security"
+
+  KMSRotation:
+    type: nodejs
+    uses: src/KMSRotation.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure rotation for customer created CMKs is enabled"
+      tags:
+        - "security"
+
+  KinesisStreamEncryptionType:
+    type: nodejs
+    uses: src/KinesisStreamEncryptionType.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Kinesis Stream is securely encrypted"
+      tags:
+        - "security"
+
+  LambdaEnvironmentCredentials:
+    type: nodejs
+    uses: src/LambdaEnvironmentCredentials.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure no hard coded AWS access key and secret key exists in lambda environment"
+      tags:
+        - "security"
+
+
+  LambdaXrayEnabled:
+    type: nodejs
+    uses: src/LambdaXrayEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "X-ray tracing is enabled for Lambda"
+      tags:
+        - "security"
+
+  LaunchConfigurationEBSEncryption:
+    type: nodejs
+    uses: src/LaunchConfigurationEBSEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Launch configuration EBS is securely encrypted"
+      tags:
+        - "security"
+
+  MQBrokerLogging:
+    type: nodejs
+    uses: src/MQBrokerLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MQ Broker logging is enabled"
+      tags:
+        - "security"
+
+  MQBrokerNotPubliclyExposed:
+    type: nodejs
+    uses: src/MQBrokerNotPubliclyExposed.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MQ Broker is not publicly exposed"
+      tags:
+        - "security"
+
+
+  NeptuneClusterStorageEncrypted:
+    type: nodejs
+    uses: src/NeptuneClusterStorageEncrypted.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Neptune storage is securely encrypted"
+      tags:
+        - "security"
+
+  MSKClusterLogging:
+    type: nodejs
+    uses: src/MSKClusterLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MSK Cluster logging is enabled"
+      tags:
+        - "security"
+
+  MSKClusterEncryption:
+    type: nodejs
+    uses: src/MSKClusterEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure MSK Cluster encryption in rest and transit is enabled"
+      tags:
+        - "security"
+
+  PasswordPolicyExpiration:
+    type: nodejs
+    uses: src/PasswordPolicyExpiration.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy expires passwords within 90 days or less"
+      tags:
+        - "security"
+
+  PasswordPolicyLength:
+    type: nodejs
+    uses: src/PasswordPolicyLength.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires minimum length of 14 or greater"
+      tags:
+        - "security"
+
+
+  PasswordPolicyLowercaseLetter:
+    type: nodejs
+    uses: src/PasswordPolicyLowercaseLetter.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one lowercase letter"
+      tags:
+        - "security"
+
+  PasswordPolicyNumber:
+    type: nodejs
+    uses: src/PasswordPolicyNumber.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one number"
+      tags:
+        - "security"
+
+  PasswordPolicyReuse:
+    type: nodejs
+    uses: src/PasswordPolicyReuse.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy prevents password reuse"
+      tags:
+        - "security"
+
+  PasswordPolicySymbol:
+    type: nodejs
+    uses: src/PasswordPolicySymbol.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one symbol"
+      tags:
+        - "security"
+
+  PasswordPolicyUppercaseLetter:
+    type: nodejs
+    uses: src/PasswordPolicyUppercaseLetter.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure IAM password policy requires at least one uppercase letter"
+      tags:
+        - "security"
+
+  RDSEncryption:
+    type: nodejs
+    uses: src/RDSEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the RDS is securely encrypted at rest"
+      tags:
+        - "security"
+
+  RDSPubliclyAccessible:
+    type: nodejs
+    uses: src/RDSPubliclyAccessible.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the RDS bucket is not public accessible"
+      tags:
+        - "security"
+
+  RedshiftClusterEncryption:
+    type: nodejs
+    uses: src/RedshiftClusterEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Redshift cluster is securely encrypted at rest"
+      tags:
+        - "security"
+
+  RedshiftClusterLogging:
+    type: nodejs
+    uses: src/RedshiftClusterLogging.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure Redshift Cluster logging is enabled"
+      tags:
+        - "security"
+
+  SNSTopicEncryption:
+    type: nodejs
+    uses: src/SNSTopicEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the SNS topic is encrypted"
+      tags:
+        - "security"
+
+  SQSPolicy:
+    type: nodejs
+    uses: src/SQSPolicy.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure SQS policy does not allow ALL (*) actions."
+      tags:
+        - "security"
+
+  SQSQueueEncryption:
+    type: nodejs
+    uses: src/SQSQueueEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the SQS queue is encrypted"
+      tags:
+        - "security"
+
+  SagemakerEncryption:
+    type: nodejs
+    uses: src/SagemakerEncryption.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure all data stored in the Sagemaker is securely encrypted at rest"
+      tags:
+        - "security"
+
+  WAFEnabled:
+    type: nodejs
+    uses: src/WAFEnabled.js
+    main: check
+    meta:
+      type: "warn"
+      description: "CloudFront Distribution should have WAF enabled"
+      tags:
+        - "security"
+
+  cloudwatchLogGroupRetention:
+    type: nodejs
+    uses: src/cloudwatchLogGroupRetention.js
+    main: check
+    meta:
+      type: "warn"
+      description: "Ensure cloudwatch log groups specify retention days"
+      tags:
+        - "security"
 #actions:
 #  dummy-fix:
 #    type: nodejs
